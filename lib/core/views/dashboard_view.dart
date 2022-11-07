@@ -3,6 +3,7 @@ import 'package:flutter_wallet_app/core/model/card_model.dart';
 import 'package:flutter_wallet_app/product/constants/project_colors.dart';
 import 'package:flutter_wallet_app/product/constants/project_duration.dart';
 import 'package:flutter_wallet_app/product/constants/project_padding.dart';
+import 'package:flutter_wallet_app/product/widgets/bottom_app_bar.dart';
 import 'package:flutter_wallet_app/product/widgets/my_card.dart';
 
 class DashBoardView extends StatefulWidget {
@@ -48,15 +49,24 @@ class _DashBoardViewState extends State<DashBoardView> with SingleTickerProvider
       right: _isOpen ? screenWidth * -0.3 : 0,
       duration: ProjectDuration().durationFast,
       curve: Curves.easeInOutCubicEmphasized,
-      child: Card(
-        margin: EdgeInsets.zero,
-        elevation: _elevation,
-        child: Padding(
-          padding: ProjectPadding.paddingLeftRightTop,
-          child: Column(
-            children: [_appBar(context), _pageViewBuilder(), _tabPageSelector()],
+      child: Scaffold(
+        body: Card(
+          margin: EdgeInsets.zero,
+          elevation: _elevation,
+          child: Padding(
+            padding: ProjectPadding.paddingLeftRightTop,
+            child: Column(
+              children: [_appBar(context), _pageViewBuilder(), _tabPageSelector()],
+            ),
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+          splashColor: ProjectColors.blueRibbon.color(),
+          onPressed: () {},
+          child: Icon(Icons.qr_code, color: ProjectColors.white.color()),
+        ),
+        bottomNavigationBar: const MyBottomAppBar(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
       ),
     );
   }

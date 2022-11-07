@@ -6,7 +6,7 @@ class ProjectGradiendColor {
   static final List<Color> chittyChitty = [const Color(0xFF396afc), const Color(0xFF2948ff)];
 }
 
-enum ProjectColors { sceptreBlue, white, dodgerBlue, blueRibbon, terracotta, mySin, blackRussian }
+enum ProjectColors { sceptreBlue, white, dodgerBlue, blueRibbon, terracotta, mySin, blackRussian, darkPansy }
 
 extension ProjectColorsExtension on ProjectColors {
   Color color() {
@@ -25,6 +25,8 @@ extension ProjectColorsExtension on ProjectColors {
         return const Color(0xFFfdbb2d);
       case ProjectColors.blackRussian:
         return const Color(0xFF020024);
+      case ProjectColors.darkPansy:
+        return const Color(0xFF663a82);
     }
   }
 }

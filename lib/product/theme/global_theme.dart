@@ -6,8 +6,11 @@ class GlobalTheme {
     scaffoldBackgroundColor: ProjectColors.sceptreBlue.color(),
     appBarTheme: AppBarTheme(color: ProjectColors.sceptreBlue.color()),
     textTheme: TextTheme(headline5: TextStyle(color: ProjectColors.white.color())),
-    iconTheme: IconThemeData(color: ProjectColors.white.color()),
+    iconTheme: const IconThemeData(color: Colors.white),
     cardColor: ProjectColors.sceptreBlue.color(),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: ProjectColors.blackRussian.color(),
+    ),
   );
   static ThemeData lightTheme = ThemeData.light();
 }
