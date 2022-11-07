@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_wallet_app/product/constants/project_colors.dart';
 
 class GlobalTheme {
   static ThemeData darkTheme = ThemeData.dark().copyWith(
@@ -9,17 +10,4 @@ class GlobalTheme {
     cardColor: ProjectColors.sceptreBlue.color(),
   );
   static ThemeData lightTheme = ThemeData.light();
-}
-
-enum ProjectColors { sceptreBlue, white }
-
-extension ProjectColorsExtension on ProjectColors {
-  Color color() {
-    switch (this) {
-      case ProjectColors.sceptreBlue:
-        return const Color(0xFF343442);
-      case ProjectColors.white:
-        return Colors.white;
-    }
-  }
 }
