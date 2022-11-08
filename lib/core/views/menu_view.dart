@@ -3,14 +3,18 @@ import 'package:flutter_wallet_app/core/constants/string_constants.dart';
 import 'package:flutter_wallet_app/product/constants/project_padding.dart';
 import 'package:flutter_wallet_app/product/widgets/menu_icon.dart';
 
-class MenuView extends StatelessWidget {
+class MenuView extends StatefulWidget {
   const MenuView({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<MenuView> createState() => _MenuViewState();
+}
+
+class _MenuViewState extends State<MenuView> with SingleTickerProviderStateMixin {
   final String _logOut = 'Log out';
-
   final String _description = 'Aydin, TR';
-
   final String _name = 'Taha TURAN';
 
   @override
@@ -41,6 +45,7 @@ class MenuView extends StatelessWidget {
             const MenuIcon(name: StringConstants.menuUtilityBills, icon: Icons.data_thresholding_outlined),
             const MenuIcon(name: StringConstants.menuFoundTransfer, icon: Icons.transfer_within_a_station_outlined),
             const MenuIcon(name: StringConstants.menuBranches, icon: Icons.home_work_outlined),
+            const SizedBox(height: 80),
             Expanded(child: MenuIcon(name: _logOut, icon: Icons.exit_to_app_outlined))
           ],
         ),

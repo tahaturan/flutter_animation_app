@@ -6,6 +6,7 @@ import 'package:flutter_wallet_app/product/constants/project_duration.dart';
 import 'package:flutter_wallet_app/product/constants/project_padding.dart';
 import 'package:flutter_wallet_app/product/widgets/bottom_app_bar.dart';
 import 'package:flutter_wallet_app/product/widgets/my_card.dart';
+import 'package:flutter_wallet_app/product/widgets/my_listtile.dart';
 import 'package:flutter_wallet_app/product/widgets/tab_selector.dart';
 
 class DashBoardView extends StatefulWidget {
@@ -69,8 +70,17 @@ class _DashBoardViewState extends State<DashBoardView> with TickerProviderStateM
             elevation: _elevation,
             child: Padding(
               padding: ProjectPadding.paddingLeftRightTop,
-              child: Column(
-                children: [_appBar(context), _pageViewBuilder(), TapSelector(tabController: _tabController)],
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _appBar(context),
+                    _pageViewBuilder(),
+                    TapSelector(tabController: _tabController),
+                    const SizedBox(height: 15),
+                    const _Body()
+                  ],
+                ),
               ),
             ),
           ),
@@ -113,6 +123,48 @@ class _DashBoardViewState extends State<DashBoardView> with TickerProviderStateM
         ),
         Text(_myCard, style: Theme.of(context).textTheme.titleLarge),
         const Icon(Icons.add_outlined),
+      ],
+    );
+  }
+}
+
+class _Body extends StatelessWidget {
+  const _Body({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Transactions',
+              style: Theme.of(context).textTheme.headline5,
+            ),
+            const Icon(Icons.compare_arrows_outlined)
+          ],
+        ),
+        const SizedBox(height: 15),
+        Text('Today', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey)),
+        const MyListtile(
+            product: "Macbook Pro 15'", company: 'Apple', amound: 2499, icon: Icons.apple_outlined, isBuy: true),
+        const MyListtile(
+            product: "Incomming Transfer", company: 'UpWork', amound: 499, icon: Icons.swipe_up_outlined, isBuy: false),
+        Text('Yesterday', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey)),
+        const MyListtile(
+            product: "Airpods Pro", company: 'Apple', amound: 199, icon: Icons.apple_outlined, isBuy: true),
+        const MyListtile(
+            product: "Coffe", company: 'Starbucks', amound: 19.50, icon: Icons.coffee_outlined, isBuy: true),
+        const MyListtile(
+            product: "Money Transfer",
+            company: 'Yapi Kredi',
+            amound: 500,
+            icon: Icons.attach_money_outlined,
+            isBuy: false),
       ],
     );
   }
