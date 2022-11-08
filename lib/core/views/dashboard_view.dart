@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_wallet_app/core/model/card_model.dart';
 import 'package:flutter_wallet_app/product/constants/project_colors.dart';
 import 'package:flutter_wallet_app/product/constants/project_duration.dart';
 import 'package:flutter_wallet_app/product/constants/project_padding.dart';
 import 'package:flutter_wallet_app/product/widgets/bottom_app_bar.dart';
 import 'package:flutter_wallet_app/product/widgets/my_card.dart';
+import 'package:flutter_wallet_app/product/widgets/tab_selector.dart';
 
 class DashBoardView extends StatefulWidget {
   const DashBoardView({
@@ -15,7 +17,7 @@ class DashBoardView extends StatefulWidget {
   State<DashBoardView> createState() => _DashBoardViewState();
 }
 
-class _DashBoardViewState extends State<DashBoardView> with SingleTickerProviderStateMixin {
+class _DashBoardViewState extends State<DashBoardView> with TickerProviderStateMixin {
   final String _myCard = 'My Card';
 
   final double _elevation = 15;
@@ -23,66 +25,64 @@ class _DashBoardViewState extends State<DashBoardView> with SingleTickerProvider
   final double sizedBoxHeight = 200;
   late final List<CardModel> _cards;
   late final TabController _tabController;
+  late AnimationController _animationController;
+  late Animation<double> _scaleAnimation;
 
   @override
   void initState() {
     super.initState();
     _cards = CardModel.dummyCard();
     _tabController = TabController(length: CardModel.dummyCard().length, vsync: this);
+    _animationController = AnimationController(vsync: this, duration: ProjectDuration().durationFast);
+    _scaleAnimation = Tween(begin: 1.0, end: 0.6).animate(_animationController);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _animationController.dispose();
   }
 
   void _chanceOpen() {
     setState(() {
+      _isOpen ? _animationController.reverse() : _animationController.forward();
       _isOpen = !_isOpen;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
 
     return AnimatedPositioned(
-      top: _isOpen ? screenHeight * 0.1 : 0,
-      bottom: _isOpen ? screenHeight * 0.1 : 0,
+      top: 0,
+      bottom: 0,
       left: _isOpen ? screenWidth * 0.5 : 0,
       right: _isOpen ? screenWidth * -0.3 : 0,
       duration: ProjectDuration().durationFast,
-      curve: Curves.easeInOutCubicEmphasized,
-      child: Scaffold(
-        body: Card(
-          margin: EdgeInsets.zero,
-          elevation: _elevation,
-          child: Padding(
-            padding: ProjectPadding.paddingLeftRightTop,
-            child: Column(
-              children: [_appBar(context), _pageViewBuilder(), _tabPageSelector()],
+      curve: Curves.easeInOutQuint,
+      child: ScaleTransition(
+        scale: _scaleAnimation,
+        child: Scaffold(
+          body: Card(
+            margin: EdgeInsets.zero,
+            elevation: _elevation,
+            child: Padding(
+              padding: ProjectPadding.paddingLeftRightTop,
+              child: Column(
+                children: [_appBar(context), _pageViewBuilder(), TapSelector(tabController: _tabController)],
+              ),
             ),
           ),
+          floatingActionButton: FloatingActionButton(
+            splashColor: ProjectColors.blueRibbon.color(),
+            onPressed: () {},
+            child: Icon(Icons.qr_code, color: ProjectColors.white.color()),
+          ),
+          bottomNavigationBar: const MyBottomAppBar(),
+          floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
         ),
-        floatingActionButton: FloatingActionButton(
-          splashColor: ProjectColors.blueRibbon.color(),
-          onPressed: () {},
-          child: Icon(Icons.qr_code, color: ProjectColors.white.color()),
-        ),
-        bottomNavigationBar: const MyBottomAppBar(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
       ),
-    );
-  }
-
-  Widget _tabPageSelector() {
-    const double indicatorSize = 10;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        TabPageSelector(
-          controller: _tabController,
-          indicatorSize: indicatorSize,
-          color: ProjectColors.blackRussian.color(),
-          selectedColor: ProjectColors.blueRibbon.color(),
-        )
-      ],
     );
   }
 

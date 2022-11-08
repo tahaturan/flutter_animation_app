@@ -25,7 +25,8 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
         currentIndex: _currentIndex,
         onTap: _chanceIndex,
         type: BottomNavigationBarType.fixed,
-        backgroundColor: ProjectColors.darkPansy.color(),
+        backgroundColor: ProjectColors.sceptreBlue.color(),
+        elevation: 0,
         showUnselectedLabels: false,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),

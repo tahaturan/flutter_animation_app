@@ -29,11 +29,11 @@ class _MyCardState extends State<MyCard> {
         width: screenWidth * 0.8,
         child: Card(
           color: Colors.transparent,
-          elevation: 8,
+          elevation: 0,
           child: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: ProjectGradiendColor.chittyChitty,
+                  colors: ProjectGradiendColor.kingYna,
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -68,10 +68,7 @@ class _MyCardState extends State<MyCard> {
                   Text('\$${widget.cardModel?.balance}', style: Theme.of(context).textTheme.headline6),
                 ],
               ),
-              Text(
-                widget.cardModel?.bank ?? '',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
+              Text(widget.cardModel?.bank ?? '', style: Theme.of(context).textTheme.bodyLarge),
             ],
           ),
           Text(widget.cardModel?.cardNumber ?? '',
@@ -80,12 +77,14 @@ class _MyCardState extends State<MyCard> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(_name, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey)),
                   Text(widget.cardModel?.name ?? '')
                 ],
               ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(_expiration, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey)),
                   Text('${widget.cardModel?.month}/${widget.cardModel?.year}')
