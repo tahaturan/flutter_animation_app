@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_wallet_app/product/constants/project_colors.dart';
 
 class MyBottomAppBar extends StatefulWidget {
   const MyBottomAppBar({super.key});
@@ -25,7 +24,6 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
         currentIndex: _currentIndex,
         onTap: _chanceIndex,
         type: BottomNavigationBarType.fixed,
-        backgroundColor: ProjectColors.sceptreBlue.color(),
         elevation: 0,
         showUnselectedLabels: false,
         items: const [

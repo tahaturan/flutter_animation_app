@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_wallet_app/product/constants/project_colors.dart';
+import 'package:flutter_wallet_app/product/global/theme_notifier.dart';
+import 'package:provider/provider.dart';
 
 class MyListtile extends StatelessWidget {
   const MyListtile({
@@ -26,7 +28,11 @@ class MyListtile extends StatelessWidget {
       trailing: isBuy
           ? Text('-$amound \$', style: TextStyle(color: ProjectColors.blackRussian.color()))
           : Text('+$amound \$', style: TextStyle(color: ProjectColors.mySin.color())),
-      leading: CircleAvatar(backgroundColor: ProjectColors.blackRussian.color(), child: Icon(icon)),
+      leading: CircleAvatar(
+          backgroundColor: context.watch<ThemeNotifier>().isDarkTheme
+              ? ProjectColors.blackRussian.color()
+              : ProjectColors.dodgerBlue.color(),
+          child: Icon(icon)),
     );
   }
 }

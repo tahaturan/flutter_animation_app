@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_wallet_app/core/views/home_page.dart';
-import 'package:flutter_wallet_app/product/theme/global_theme.dart';
+import 'package:flutter_wallet_app/product/global/theme_notifier.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [ChangeNotifierProvider<ThemeNotifier>(create: (context) => ThemeNotifier())],
+    builder: (context, child) => const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -14,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: GlobalTheme.darkTheme,
+      theme: context.watch<ThemeNotifier>().currentTheme,
       home: const HomePage(),
     );
   }

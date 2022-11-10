@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_wallet_app/core/constants/string_constants.dart';
+import 'package:flutter_wallet_app/product/constants/project_colors.dart';
 import 'package:flutter_wallet_app/product/constants/project_padding.dart';
+import 'package:flutter_wallet_app/product/global/theme_notifier.dart';
 import 'package:flutter_wallet_app/product/widgets/menu_icon.dart';
+import 'package:provider/provider.dart';
 
 class MenuView extends StatefulWidget {
   const MenuView({
@@ -16,7 +19,8 @@ class _MenuViewState extends State<MenuView> with SingleTickerProviderStateMixin
   final String _logOut = 'Log out';
   final String _description = 'Aydin, TR';
   final String _name = 'Taha TURAN';
-
+  final String _moonPng = 'assets/png/ic_moon.png';
+  final String _sunPng = 'assets/png/ic_sun.png';
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -46,6 +50,15 @@ class _MenuViewState extends State<MenuView> with SingleTickerProviderStateMixin
             const MenuIcon(name: StringConstants.menuFoundTransfer, icon: Icons.transfer_within_a_station_outlined),
             const MenuIcon(name: StringConstants.menuBranches, icon: Icons.home_work_outlined),
             const SizedBox(height: 80),
+            Switch(
+              value: context.watch<ThemeNotifier>().isDarkTheme,
+              onChanged: (value) {
+                context.read<ThemeNotifier>().chanceTheme();
+              },
+              activeThumbImage: AssetImage(_moonPng),
+              inactiveThumbImage: AssetImage(_sunPng),
+              activeColor: ProjectColors.blackRussian.color(),
+            ),
             Expanded(child: MenuIcon(name: _logOut, icon: Icons.exit_to_app_outlined))
           ],
         ),

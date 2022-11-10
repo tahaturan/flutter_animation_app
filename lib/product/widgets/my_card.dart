@@ -3,6 +3,8 @@ import 'package:flutter_wallet_app/core/model/card_model.dart';
 import 'package:flutter_wallet_app/product/constants/project_border_radius.dart';
 import 'package:flutter_wallet_app/product/constants/project_colors.dart';
 import 'package:flutter_wallet_app/product/constants/project_padding.dart';
+import 'package:flutter_wallet_app/product/global/theme_notifier.dart';
+import 'package:provider/provider.dart';
 
 class MyCard extends StatefulWidget {
   final CardModel? cardModel;
@@ -33,7 +35,9 @@ class _MyCardState extends State<MyCard> {
           child: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: ProjectGradiendColor.kingYna,
+                  colors: context.watch<ThemeNotifier>().isDarkTheme
+                      ? ProjectGradiendColor.kingYna
+                      : ProjectGradiendColor.chittyChitty,
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -64,11 +68,17 @@ class _MyCardState extends State<MyCard> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(_balanceTitle, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey)),
+                  Text(_balanceTitle,
+                      style: context.watch<ThemeNotifier>().isDarkTheme
+                          ? Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey)
+                          : Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white)),
                   Text('\$${widget.cardModel?.balance}', style: Theme.of(context).textTheme.headline6),
                 ],
               ),
-              Text(widget.cardModel?.bank ?? '', style: Theme.of(context).textTheme.bodyLarge),
+              Text(widget.cardModel?.bank ?? '',
+                  style: context.watch<ThemeNotifier>().isDarkTheme
+                      ? Theme.of(context).textTheme.bodyLarge
+                      : Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.white)),
             ],
           ),
           Text(widget.cardModel?.cardNumber ?? '',
@@ -79,14 +89,20 @@ class _MyCardState extends State<MyCard> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(_name, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey)),
+                  Text(_name,
+                      style: context.watch<ThemeNotifier>().isDarkTheme
+                          ? Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey)
+                          : Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white)),
                   Text(widget.cardModel?.name ?? '')
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(_expiration, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey)),
+                  Text(_expiration,
+                      style: context.watch<ThemeNotifier>().isDarkTheme
+                          ? Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey)
+                          : Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white)),
                   Text('${widget.cardModel?.month}/${widget.cardModel?.year}')
                 ],
               ),

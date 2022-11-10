@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ProjectGradiendColor {
   static final List<Color> gradiendOne = [const Color(0xFF020024), const Color(0xFF093179), const Color(0xFF0097ff)];
   static final List<Color> kingYna = [const Color(0xFF1a2a6c), const Color(0xFFb21f1f), const Color(0xFFfdbb2d)];
-  static final List<Color> chittyChitty = [const Color(0xFF396afc), const Color(0xFF2948ff)];
+  static final List<Color> chittyChitty = [const Color(0xFF4776E6), const Color(0xFF8E54E9)];
 }
 
 enum ProjectColors { sceptreBlue, white, dodgerBlue, blueRibbon, terracotta, mySin, blackRussian, darkPansy }
