@@ -1,7 +1,8 @@
-### Dark Theme
+Dark Theme
 <hr>
 <img src= "assets/gif/readme.gif">
 <hr>
-### Light Theme
-<img src= "assets/gif/readmedark.gif">
+Light Theme
+<hr>
+<img src= "assets/gif/readmelight.gif">
 <hr>
