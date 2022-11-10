@@ -48,9 +48,9 @@ class CardModel {
         cardNumber: '****  ****  ****  8819',
       ),
       CardModel(
-        name: 'Taha Turan',
-        balance: 1000,
-        bank: 'TEB',
+        name: 'Selin ÖZ',
+        balance: 5800,
+        bank: 'AKBANK',
         year: '26',
         month: '11',
         city: 'Adyin',
